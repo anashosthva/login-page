@@ -1,11 +1,19 @@
 <?php
-  $servername = "localhost";
-  $username = "user";
-  $password = "user";
-  $dbname = "users-db";
+  // $servername = "localhost";
+  // $username = "user";
+  // $password = "user";
+  // $dbname = "users-db";
+
+      $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+			$cleardb_server = $cleardb_url["host"];
+			$cleardb_username = $cleardb_url["user"];
+			$cleardb_password = $cleardb_url["pass"];
+			$cleardb_db = substr($cleardb_url["path"],1);
+			$active_group = 'default';
+			$query_builder = TRUE;
 
   // Connect to the database
-  $conn = new mysqli($servername, $username, $password, $dbname);
+  $conn = new mysqli($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 
   // Check if the connection is successful
   if ($conn->connect_error) {
